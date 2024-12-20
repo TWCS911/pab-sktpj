@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   badges: ^3.1.2
+  curved_navigation_bar: ^1.0.6
 
 dev_dependencies:
   flutter_test:

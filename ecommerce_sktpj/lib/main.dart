@@ -4,6 +4,8 @@ import 'package:ecommerce_sktpj/pages/Homepage.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget{
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

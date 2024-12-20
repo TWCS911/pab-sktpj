@@ -2,6 +2,8 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 
 class Homeappbar extends StatelessWidget{
+  const Homeappbar({super.key});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

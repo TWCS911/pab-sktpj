@@ -1,9 +1,13 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_sktpj/widgets/HomeAppBar.dart';
 import 'package:ecommerce_sktpj/widgets/CategoriesWidget.dart';
 import 'package:ecommerce_sktpj/widgets/ItemsWidget.dart';
 
 class Homepage extends StatelessWidget{
+  const Homepage({super.key});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -91,6 +95,17 @@ class Homepage extends StatelessWidget{
                   Itemswidget()
             ],),
           )
+        ],
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        onTap: (index) {},
+        height: 70,
+        color: Color(0xFF4C54A5),
+        items: [
+          Icon(Icons.home, size: 30, color: Colors.white,),
+          Icon(Icons.shopping_cart, size: 30, color: Colors.white,),
+          Icon(Icons.account_circle_sharp, size: 30, color: Colors.white,),
         ],
       ),
     );
