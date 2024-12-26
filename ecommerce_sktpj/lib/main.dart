@@ -1,5 +1,8 @@
+import 'package:ecommerce_sktpj/pages/LoginPage.dart';
+import 'package:ecommerce_sktpj/pages/ProductPage.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_sktpj/pages/Homepage.dart';
+import 'package:ecommerce_sktpj/pages/CartPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,10 +15,13 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white
       ),
       routes: {
-        "/" : (context) => Homepage()
+        "/" : (context) => Loginpage(),
+        "homePage" : (context) => Homepage(),
+        "cartPage" : (context) => Cartpage(),
+        "productPage" : (context) => Productpage(),
       },
     );
   }
