@@ -10,26 +10,26 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-int _selectedIndex = 0;
-static const List<Widget> _screenOptions = <Widget> [
-  Homepage(),
-  WishlistPage(),
-  SearchPage(),
-  ProfilePage(),
-];
+  int _selectedIndex = 0;
+  static const List<Widget> _screenOptions = <Widget>[
+    Homepage(),
+    WishlistPage(),
+    SearchPage(),
+    ProfilePage(),
+  ];
 
-void _onItemTapped(int index){
-  setState(() {
-    _selectedIndex = index;
-  });
-}
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screenOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem> [
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'Wishlist'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
@@ -42,6 +42,6 @@ void _onItemTapped(int index){
         selectedItemColor: Color(0xFF4C54A5),
         unselectedItemColor: Colors.grey,
       ),
-    );   
+    );
   }
 }

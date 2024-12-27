@@ -28,14 +28,7 @@ class _SearchScreenState extends State<SearchPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Color(0xFF4C54A5),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Search Medicine', style: TextStyle(color: Color(0xFF4C54A5))),
+        title: Text('Cari', style: TextStyle(color: Color(0xFF4C54A5), fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             icon: Icon(Icons.filter_alt, color: Color(0xFF4C54A5),),

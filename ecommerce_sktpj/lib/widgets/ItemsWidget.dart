@@ -20,7 +20,7 @@ class Itemswidget extends StatelessWidget {
       shrinkWrap: true,
       padding: EdgeInsets.all(10),
       children: List.generate(filteredProduct.length, (index) {
-        Product product = filteredProduct[index]; // Use filtered product list
+        Product product = filteredProduct[index];
         
         return InkWell(
           onTap: () {

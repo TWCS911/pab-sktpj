@@ -1,5 +1,4 @@
 import 'package:ecommerce_sktpj/models/Product.dart';
-import 'package:ecommerce_sktpj/pages/Homepage.dart';
 import 'package:ecommerce_sktpj/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +10,11 @@ class Productappbar extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      color: Colors.white,
-      padding:  EdgeInsets.all(25),
-      child: Row(
+    return AppBar(
+      toolbarHeight: 90,
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.white,
+      title: Row(
         children: [
           InkWell(
             onTap: (){
@@ -29,7 +29,7 @@ class Productappbar extends StatelessWidget{
           Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(
-              varProduct.name,
+              "Detail Produk",
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
@@ -38,13 +38,6 @@ class Productappbar extends StatelessWidget{
             ), 
             ),
             Spacer(),
-            IconButton(
-              onPressed: () {
-                
-              },
-              icon: const Icon(Icons.favorite_border),
-              color: Colors.red,
-            )
         ],
       ),
     );

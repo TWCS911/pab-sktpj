@@ -1,3 +1,4 @@
+import 'package:ecommerce_sktpj/pages/main_page.dart';
 import 'package:ecommerce_sktpj/widgets/HomeAppBar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class Cartappbar extends StatelessWidget{
         children: [
           InkWell(
             onTap: (){
-              Navigator.pushNamed(context, "homePage");
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
             },
             child: Icon(
               Icons.arrow_back,

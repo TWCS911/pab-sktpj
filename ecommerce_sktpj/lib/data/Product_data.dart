@@ -11,7 +11,7 @@ var productList = [
   ),
   Product(
     name: "Promag Suspensi 60 ml",
-    description: "Obat peredah maag.",
+    description: "Promag Suspensi 60 ml digunakan untuk meredakan gangguan pencernaan, seperti maag, asam lambung, dan nyeri ulu hati. Mampu menetralkan asam lambung dan melindungi dinding lambung.",
     type: "Sirup",
     harga: 19100,
     imageAsset: "images/promag.png",
@@ -19,7 +19,7 @@ var productList = [
   ),
   Product(
     name: "Sumagesic 600 mg 4 Tablet",
-    description: "Obat untuk mengatasi nyeri sendi.",
+    description: "Sumagesic 600 mg 4 Tablet digunakan untuk meredakan nyeri sedang hingga berat, seperti nyeri otot, nyeri sendi, dan nyeri pasca operasi, serta mengurangi peradangan.",
     type: "Tablet",
     harga: 3000,
     imageAsset: "images/sumagesic.png",
@@ -35,7 +35,7 @@ var productList = [
   ),
   Product(
     name: "Imboost Force Ultimate 10 Kaplet",
-    description: "Berfungsi untuk meningkatkan daya tahan tubuh.",
+    description: "Imboost Force Ultimate 10 Kaplet berfungsi untuk meningkatkan daya tahan tubuh, membantu melawan infeksi, dan mempercepat pemulihan. Mengandung Echinacea dan Zinc untuk mendukung sistem imun.",
     type: "Kaplet",
     harga: 111600,
     imageAsset: "images/imboost.png",
@@ -43,7 +43,7 @@ var productList = [
   ),
   Product(
     name: "Imunped Sirup 60 ml",
-    description: "Obat untuk memperkuat immune.",
+    description: "Imunped Sirup 60 ml berfungsi untuk meningkatkan daya tahan tubuh, membantu melawan infeksi, dan mendukung sistem imun, terutama saat tubuh membutuhkan perlindungan ekstra.",
     type: "Sirup",
     harga: 62900,
     imageAsset: "images/imunped.png",
@@ -67,7 +67,7 @@ var productList = [
   ),
   Product(
     name: "Sangobion 10 Kapsul",
-    description: "Obat untuk mengatasi darah rendah.",
+    description: "Sangobion 10 Kapsul berfungsi untuk mengatasi anemia, meningkatkan produksi sel darah merah, dan membantu mengembalikan kadar hemoglobin dalam darah.",
     type: "Kapsul",
     harga: 23700,
     imageAsset: "images/sangobion.png",
@@ -75,7 +75,7 @@ var productList = [
   ),
   Product(
     name: "Panadol Extra 10 Kaplet",
-    description: "Obat untuk mengurangi sakit kepala.",
+    description: "Panadol Extra 10 Kaplet digunakan untuk meredakan sakit ringan hingga sedang, seperti sakit kepala, sakit gigi, nyeri otot, dan demam. Mengandung paracetamol dan kafein untuk meningkatkan efek pereda nyeri.",
     type: "Kaplet",
     harga: 13900,
     imageAsset: "images/panadolextra.png",

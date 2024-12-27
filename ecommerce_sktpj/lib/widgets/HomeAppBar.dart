@@ -1,4 +1,6 @@
 import 'package:badges/badges.dart' as badges;
+import 'package:ecommerce_sktpj/pages/CartPage.dart';
+import 'package:ecommerce_sktpj/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 class Homeappbar extends StatelessWidget{
@@ -7,25 +9,19 @@ class Homeappbar extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      color : Colors.white,
-      padding: EdgeInsets.all(25),
-      child: Row(children: [
-        Icon(
-          Icons.sort,
-          size: 30,
-          color: Color(0xFF4C53A5)
-        ),
-        Padding(padding: EdgeInsets.only(
-          left: 20,
-        ),
-        child: Text(
+    return AppBar(
+      backgroundColor: Colors.white,
+      toolbarHeight: 90,
+      automaticallyImplyLeading: false,
+      title: Padding(
+        padding: EdgeInsets.all(25),
+        child: Row(children: [
+        Text(
           "Apotek Maggha Mulia",
           style: TextStyle(
             fontSize: 23,
             fontWeight: FontWeight.bold,
             color:Color(0xFF4C54A5)
-          ),
           ),
         ),
         Spacer(),
@@ -42,16 +38,18 @@ class Homeappbar extends StatelessWidget{
           ),
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, "cartPage");
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Cartpage()));
             },
             child: Icon(
               Icons.shopping_bag_outlined,
               size: 35,
               color: Color(0xFF4C54A5),
             ),
-          ),
         ),
-      ],),
+      ),
+        ],
+      ),
+    ),
     );
   }
 }
