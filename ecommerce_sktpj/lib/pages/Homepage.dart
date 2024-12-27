@@ -1,22 +1,53 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:ecommerce_sktpj/data/Product_data.dart';
+import 'package:ecommerce_sktpj/models/Product.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_sktpj/widgets/HomeAppBar.dart';
 import 'package:ecommerce_sktpj/widgets/CategoriesWidget.dart';
 import 'package:ecommerce_sktpj/widgets/ItemsWidget.dart';
 
-class Homepage extends StatelessWidget{
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
   @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  // List of all products
+  List<Product> listProduct = productList;
+  
+  // Filtered product list (initially contains all products)
+  List<Product> filteredProduct = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initially, show all products
+    filteredProduct = listProduct;
+  }
+
+  // Function to filter products based on the selected category
+  void _filterProduct(String type) {
+    setState(() {
+      if (type == 'All' || type.isEmpty) {
+        // If "All" is selected or no category is selected, show all products
+        filteredProduct = listProduct;
+      } else {
+        // Filter the list based on the selected category
+        filteredProduct = listProduct
+            .where((product) => product.type == type)
+            .toList();
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: ListView(
         children: [
           Homeappbar(),
           Container(
-            //temp height
-            // height: 500,
             padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
               color: Color(0xFFEDECF2),
@@ -25,86 +56,16 @@ class Homepage extends StatelessWidget{
                 topRight: Radius.circular(35),
               ),
             ),
-            child: Column(children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 15),
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Row(
+            child: Column(
+              children: [
+                // Categories widget to filter products
+                Categorieswidget(onTap: _filterProduct),  // Passing filter function
 
-                  //search
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 5),
-                      height: 50,
-                      width: 300,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Cari disini..."
-                        ),
-                      ),
-                    ),
-                    Spacer(),
-                    Icon(
-                      Icons.camera_alt,
-                      size:  27,
-                      color: Color(0xFF4C54A5),
-                    )
-                  ],),
-                  ),
-
-                  //kategori
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.symmetric(
-                      vertical: 20,
-                      horizontal: 10,
-                    ),
-                    child: Text(
-                      "Kategori",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF4C54A5)
-                      )
-                    ),
-                  ),
-                  //kategori
-                  Categorieswidget(),
-
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    child: Text(
-                      "Terlaris",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF4C54A5),
-                      ),
-                    ),
-                  ),
-
-                  //item
-                  Itemswidget()
-            ],),
-          )
-        ],
-      ),
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
-        onTap: (index) {},
-        height: 70,
-        color: Color(0xFF4C54A5),
-        items: [
-          Icon(Icons.home, size: 30, color: Colors.white,),
-          Icon(Icons.shopping_cart, size: 30, color: Colors.white,),
-          Icon(Icons.account_circle_sharp, size: 30, color: Colors.white,),
+                // Display products (filtered or all)
+                Itemswidget(filteredProduct: filteredProduct),  // Pass filtered products
+              ],
+            ),
+          ),
         ],
       ),
     );

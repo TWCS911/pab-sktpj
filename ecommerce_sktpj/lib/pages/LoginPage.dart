@@ -1,3 +1,5 @@
+import 'package:ecommerce_sktpj/pages/Homepage.dart';
+import 'package:ecommerce_sktpj/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 class Loginpage extends StatelessWidget {
@@ -108,7 +110,7 @@ class Loginpage extends StatelessWidget {
               // Tombol Login
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, "homePage");
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
                 },
                 child: Container(
                   alignment: Alignment.center,

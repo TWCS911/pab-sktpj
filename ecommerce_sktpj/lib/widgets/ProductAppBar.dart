@@ -1,7 +1,13 @@
+import 'package:ecommerce_sktpj/models/Product.dart';
+import 'package:ecommerce_sktpj/pages/Homepage.dart';
+import 'package:ecommerce_sktpj/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 
 class Productappbar extends StatelessWidget{
+  final Product varProduct;
+  const Productappbar({super.key, required this.varProduct});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -12,7 +18,7 @@ class Productappbar extends StatelessWidget{
         children: [
           InkWell(
             onTap: (){
-              Navigator.pushNamed(context, "homePage");
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
             },
             child: Icon(
               Icons.arrow_back,
@@ -23,7 +29,7 @@ class Productappbar extends StatelessWidget{
           Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(
-              "Produk",
+              varProduct.name,
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
@@ -32,9 +38,11 @@ class Productappbar extends StatelessWidget{
             ), 
             ),
             Spacer(),
-            Icon(
-              Icons.favorite,
-              size: 30,
+            IconButton(
+              onPressed: () {
+                
+              },
+              icon: const Icon(Icons.favorite_border),
               color: Colors.red,
             )
         ],
