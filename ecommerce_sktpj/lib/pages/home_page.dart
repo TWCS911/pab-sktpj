@@ -1,9 +1,9 @@
 import 'package:ecommerce_sktpj/data/Product_data.dart';
 import 'package:ecommerce_sktpj/models/Product.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_sktpj/widgets/HomeAppBar.dart';
-import 'package:ecommerce_sktpj/widgets/CategoriesWidget.dart';
-import 'package:ecommerce_sktpj/widgets/ItemsWidget.dart';
+import 'package:ecommerce_sktpj/widgets/home_appbar.dart';
+import 'package:ecommerce_sktpj/widgets/categories_widget.dart';
+import 'package:ecommerce_sktpj/widgets/items_widget.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -44,9 +44,9 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: Homeappbar(),
       body: ListView(
         children: [
-          Homeappbar(),
           Container(
             padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(

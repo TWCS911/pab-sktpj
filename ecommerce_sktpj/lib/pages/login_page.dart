@@ -1,8 +1,19 @@
-import 'package:ecommerce_sktpj/pages/Homepage.dart';
+import 'package:ecommerce_sktpj/data/user_data.dart';
+import 'package:ecommerce_sktpj/models/user.dart';
 import 'package:ecommerce_sktpj/pages/main_page.dart';
+import 'package:ecommerce_sktpj/pages/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Loginpage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+final TextEditingController _emailNameController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +38,10 @@ class Loginpage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: _emailNameController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person, color: Colors.blue),
-                    hintText: 'Masukkan Username Anda',
+                    hintText: 'Masukkan Username atau email',
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
@@ -52,6 +64,7 @@ class Loginpage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock, color: Colors.blue),
@@ -90,7 +103,7 @@ class Loginpage extends StatelessWidget {
                     // Don't have an account link (aligned right)
                     TextButton(
                       onPressed: () {
-                        // Tambahkan fungsionalitas untuk registrasi akun
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
                       },
                       child: Text(
                         'Belum Punya Akun?',
@@ -109,8 +122,24 @@ class Loginpage extends StatelessWidget {
 
               // Tombol Login
               InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
+                onTap: () async {
+                  String emailName = _emailNameController.text;
+                  String password = _passwordController.text;
+
+                  if (validateLogin(emailName, password)){
+                    SharedPreferences prefs = 
+                      await SharedPreferences.getInstance();
+                      await prefs.setBool('isLoggedIn', true);
+                      await prefs.setString('email', emailName);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
+                  }
+                  else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Email atau Password Salah'),
+                      ),
+                    );
+                  }
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -146,4 +175,13 @@ class Loginpage extends StatelessWidget {
       ),
     );
   }
+  bool validateLogin(String email, String password) {
+    for(User user in userList) {
+      if((user.email == email && user.password == password) || (user.name == email && user.password == password)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
+

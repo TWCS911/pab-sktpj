@@ -1,7 +1,7 @@
-import 'package:ecommerce_sktpj/widgets/CartBottomNavBar.dart';
-import 'package:ecommerce_sktpj/widgets/CartItemSamples.dart';
+import 'package:ecommerce_sktpj/widgets/cart_bottom_navbar.dart';
+import 'package:ecommerce_sktpj/widgets/cart_item_samples.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_sktpj/widgets/CartAppBar.dart';
+import 'package:ecommerce_sktpj/widgets/cart_appbar.dart';
 
 class Cartpage extends StatelessWidget {
   @override

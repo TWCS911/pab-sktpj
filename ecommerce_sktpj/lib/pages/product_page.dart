@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:ecommerce_sktpj/models/Product.dart';
-import 'package:ecommerce_sktpj/widgets/ProductAppBar.dart';
+import 'package:ecommerce_sktpj/widgets/product_appbar.dart';
 import 'package:clippy_flutter/arc.dart';
-import 'package:ecommerce_sktpj/widgets/ProductBottomNavBar.dart';
+import 'package:ecommerce_sktpj/widgets/product_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +15,7 @@ class Productpage extends StatefulWidget {
 }
 
 class _ProductpageState extends State<Productpage> {
-  bool _isFavorite = false;
+  bool isFavorite = false;
   int quantity = 1;
   TextEditingController quantityController = TextEditingController();
 
@@ -25,7 +23,8 @@ class _ProductpageState extends State<Productpage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> favoriteHomes = prefs.getStringList('favoriteHomes') ?? [];
     setState(() {
-      _isFavorite = favoriteHomes.contains(widget.varProduct.name);
+      // Mengecek apakah produk ini ada dalam daftar favorit
+      isFavorite = favoriteHomes.contains(widget.varProduct.name);
     });
   }
 
@@ -36,27 +35,30 @@ class _ProductpageState extends State<Productpage> {
     _loadFavoriteStatus();
   }
 
-  Future <void> _toggleFavorite() async {
+    Future<void> _toggleFavorite() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> favoriteHomes = prefs.getStringList('favoriteHomes') ?? [];
-    if (_isFavorite) {
+
+    if (isFavorite) {
+      // Jika produk sudah di favoritkan, maka hapus dari daftar favorit
       favoriteHomes.remove(widget.varProduct.name);
-      _isFavorite = false;
+      // isFavorite = false;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('${widget.varProduct.name} Removed from favorites'),
         duration: Duration(seconds: 1),
       ));
     } else {
-      favoriteHomes.remove(widget.varProduct.name);
-      _isFavorite = true;
+      // Jika produk belum di favoritkan, tambahkan ke daftar favorit
+      favoriteHomes.add(widget.varProduct.name);
+      // isFavorite = true;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('${widget.varProduct.name} Added to favorites'),
-        duration: Duration(seconds: 1)
-        ));
+        duration: Duration(seconds: 1),
+      ));
     }
     await prefs.setStringList('favoriteHomes', favoriteHomes);
     setState(() {
-      _isFavorite = !_isFavorite;
+      isFavorite = !isFavorite;
     });
   }
 
@@ -121,20 +123,25 @@ class _ProductpageState extends State<Productpage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            widget.varProduct.name,
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF4C54A5),
+                          Flexible(
+                            child: Text(
+                              widget.varProduct.name,
+                              style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width > 360 ? 25 : 20, // Sesuaikan ukuran font
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF4C54A5),
+                              ),
+                              maxLines: 3, // Sesuaikan jumlah maksimum baris
+                              overflow: TextOverflow.visible, // Teks akan terus dilanjutkan tanpa potongan
                             ),
                           ),
+
                           IconButton(
                             onPressed: _toggleFavorite,
                             icon: Icon(
-                              _isFavorite ? Icons.favorite:Icons.favorite_border,
+                              (isFavorite ? Icons.favorite : Icons.favorite_border),
                               size: 30,
-                              color: _isFavorite ? Colors.red : null,
+                              color: isFavorite ? Colors.red : null,
                             ),
                           ),
                         ],

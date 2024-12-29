@@ -1,4 +1,4 @@
-import 'package:ecommerce_sktpj/pages/Homepage.dart';
+import 'package:ecommerce_sktpj/pages/home_page.dart';
 import 'package:ecommerce_sktpj/pages/profile_page.dart';
 import 'package:ecommerce_sktpj/pages/search_page.dart';
 import 'package:ecommerce_sktpj/pages/wishlist_page.dart';
@@ -11,7 +11,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
-  static const List<Widget> _screenOptions = <Widget>[
+  static List<Widget> _screenOptions = <Widget>[
     Homepage(),
     WishlistPage(),
     SearchPage(),
