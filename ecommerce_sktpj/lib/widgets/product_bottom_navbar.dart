@@ -1,9 +1,12 @@
+import 'package:ecommerce_sktpj/models/Product.dart';
+import 'package:ecommerce_sktpj/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductBottomNavBar extends StatelessWidget {
-  final VoidCallback onAddToCart;
+  final Product product;
 
-  ProductBottomNavBar({required this.onAddToCart});
+  ProductBottomNavBar({required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,13 @@ class ProductBottomNavBar extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ElevatedButton(
-                onPressed: onAddToCart,
+                onPressed: () {
+                  final cart = Provider.of<CartProvider>(context, listen: false);
+                  cart.addToCart(product);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('${product.name} ditambahkan ke keranjang!')),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green, // Background color
                 ),

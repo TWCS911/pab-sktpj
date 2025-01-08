@@ -1,4 +1,4 @@
-import 'package:ecommerce_sktpj/pages/LoginPage.dart';
+import 'package:ecommerce_sktpj/pages/login_page.dart';
 import 'package:ecommerce_sktpj/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,3 +1,4 @@
+import 'package:ecommerce_sktpj/pages/checkout_page.dart';
 import 'package:flutter/material.dart';
 
 class Cartbottomnavbar extends StatelessWidget {
@@ -18,7 +19,6 @@ class Cartbottomnavbar extends StatelessWidget {
                 color: Color(0xFF4C54A5),
               ),
               onPressed: () {
-                print("Cart icon tapped");
               },
             ),
             
@@ -55,7 +55,7 @@ class Cartbottomnavbar extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     // Add checkout functionality here
-                    print("Checkout button tapped");
+                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>CheckoutPage()));
                   },
                   child: Text("Checkout"),
                   style: ElevatedButton.styleFrom(

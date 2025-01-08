@@ -1,6 +1,8 @@
+import 'package:ecommerce_sktpj/data/Product_data.dart';
 import 'package:ecommerce_sktpj/models/Product.dart';
 import 'package:ecommerce_sktpj/pages/product_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Itemswidget extends StatelessWidget {
   final List<Product> filteredProduct;
@@ -17,6 +19,8 @@ class Itemswidget extends StatelessWidget {
       padding: EdgeInsets.all(10),
       children: List.generate(filteredProduct.length, (index) {
         Product product = filteredProduct[index];
+        String formattedAmount = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp', decimalDigits: 0)
+            .format(product.harga);
 
         return InkWell(
           onTap: () {
@@ -117,7 +121,7 @@ class Itemswidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Rp.${product.harga}",
+                                "$formattedAmount",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

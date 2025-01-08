@@ -37,7 +37,7 @@ class WishlistAppbar extends StatelessWidget implements PreferredSizeWidget {
               ),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Cartpage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage()));
                 },
                 child: Icon(
                   Icons.shopping_bag_outlined,

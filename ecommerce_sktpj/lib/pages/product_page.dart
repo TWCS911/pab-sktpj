@@ -260,9 +260,7 @@ class _ProductpageState extends State<Productpage> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: ProductBottomNavBar(
-          onAddToCart: () {
-            // Add your onAddToCart code here!
-          },
+          product: widget.varProduct
         ),
       ),
     );
