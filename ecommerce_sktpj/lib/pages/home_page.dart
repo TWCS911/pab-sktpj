@@ -13,27 +13,21 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  // List of all products
   List<Product> listProduct = productList;
   
-  // Filtered product list (initially contains all products)
   List<Product> filteredProduct = [];
 
   @override
   void initState() {
     super.initState();
-    // Initially, show all products
     filteredProduct = listProduct;
   }
 
-  // Function to filter products based on the selected category
   void _filterProduct(String type) {
     setState(() {
       if (type == 'All' || type.isEmpty) {
-        // If "All" is selected or no category is selected, show all products
         filteredProduct = listProduct;
       } else {
-        // Filter the list based on the selected category
         filteredProduct = listProduct
             .where((product) => product.type == type)
             .toList();
@@ -58,11 +52,8 @@ class _HomepageState extends State<Homepage> {
             ),
             child: Column(
               children: [
-                // Categories widget to filter products
-                Categorieswidget(onTap: _filterProduct),  // Passing filter function
-
-                // Display products (filtered or all)
-                Itemswidget(filteredProduct: filteredProduct),  // Pass filtered products
+                Categorieswidget(onTap: _filterProduct),
+                Itemswidget(filteredProduct: filteredProduct),
               ],
             ),
           ),

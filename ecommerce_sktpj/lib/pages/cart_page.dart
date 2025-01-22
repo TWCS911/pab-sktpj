@@ -11,7 +11,7 @@
 //         child: Column(
 //           children: [
 //             Cartappbar(),
-//             // Kontainer untuk Cart Items dengan background color dan rounded corners
+//             // Kontainer untuk Cart cartItemsItems dengan background color dan rounded corners
 //             Container(
 //               height: 1000,
 //               padding: EdgeInsets.only(top: 15),
@@ -24,7 +24,7 @@
 //               ),
 //               child: Column(
 //                 children: [
-//                   Cartitemsamples(), // Menampilkan daftar item keranjang
+//                   CartcartItemsamples(), // Menampilkan daftar item keranjang
 
 //                   // Bagian untuk voucher code sebagai ElevatedButton
 //                   Container(
@@ -85,12 +85,12 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Keranjang'),
       ),
-      body: cart.items.isEmpty
+      body: cart.cartItems.isEmpty
           ? Center(child: Text('Keranjang Anda kosong!'))
           : ListView.builder(
-              itemCount: cart.items.length,
+              itemCount: cart.cartItems.length,
               itemBuilder: (context, index) {
-                final item = cart.items[index];
+                final item = cart.cartItems[index];
                 return ListTile(
                   leading: Image.asset(item.product.imageAsset, width: 50),
                   title: Text(item.product.name),
@@ -120,7 +120,7 @@ class CartPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (cart.items.isNotEmpty) {
+                  if (cart.cartItems.isNotEmpty) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => CheckoutPage(totalAmount: cart.totalPrice.toDouble())),

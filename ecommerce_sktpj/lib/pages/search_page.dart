@@ -1,5 +1,6 @@
 import 'package:ecommerce_sktpj/models/Product.dart';
 import 'package:ecommerce_sktpj/models/type_product.dart';
+import 'package:ecommerce_sktpj/pages/product_page.dart';
 import 'package:flutter/material.dart';
 
 // Mengimpor data
@@ -29,6 +30,7 @@ class _SearchPageState extends State<SearchPage> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         toolbarHeight: 90,
         title: Padding(
@@ -95,10 +97,14 @@ class _SearchPageState extends State<SearchPage> {
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                     onTap: () {
-                      // Handle item tap (e.g., navigate to product detail page)
-                      print('Tapped on: ${product.name}');
+                      // Navigasi ke halaman detail produk
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Productpage(varProduct: product)),
+                      );
                     },
                   ),
+
                 );
               },
             ),
@@ -121,7 +127,7 @@ class _SearchPageState extends State<SearchPage> {
                 setState(() {
                   _selectedCategory = listType[index].name;
                 });
-                Navigator.pop(context); // Close the filter modal
+                Navigator.pop(context); // tutup filter modal
               },
             );
           },

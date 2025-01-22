@@ -36,14 +36,15 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _logout(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear(); // Clear saved user data
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
-      (route) => false,
-    );
-  }
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.remove('isLoggedIn'); // Hanya menghapus status login
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => LoginPage()),
+    (route) => false,
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {

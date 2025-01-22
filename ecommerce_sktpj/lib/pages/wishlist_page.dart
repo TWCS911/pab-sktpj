@@ -34,7 +34,7 @@ class _WishlistPageState extends State<WishlistPage> {
                 // Categorieswidget(onTap: _filterProduct),  // Passing filter function
 
                 // Display products (filtered or all)
-                WishlistItems(),  // Pass filtered products
+                WishlistItems(),
               ],
             ),
           ),

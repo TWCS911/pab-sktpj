@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ecommerce_sktpj/providers/cart_provider.dart';
-import 'package:ecommerce_sktpj/pages/main_page.dart'; // Your main page
+import 'package:ecommerce_sktpj/pages/main_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,25 +40,3 @@ class MyApp extends StatelessWidget{
     );
   }
 }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//         scaffoldBackgroundColor: Colors.white,
-//       ),
-//       home: MainPage(),
-//     );
-//   }
-// }
-
-// void main() {
-//   runApp(
-//     ChangeNotifierProvider(
-//       create: (context) => CartProvider(),
-//       child: MyApp(),
-//     ),
-//   );
-// }

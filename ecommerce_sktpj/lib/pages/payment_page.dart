@@ -113,7 +113,7 @@ class PaymentPage extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Lanjutkan',
+                  'Lanjut',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),

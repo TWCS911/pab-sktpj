@@ -38,5 +38,5 @@ class CheckoutAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(90); // Sesuaikan dengan toolbarHeight
+  Size get preferredSize => const Size.fromHeight(90);
 }

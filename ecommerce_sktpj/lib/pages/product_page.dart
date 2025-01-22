@@ -42,7 +42,6 @@ class _ProductpageState extends State<Productpage> {
     if (isFavorite) {
       // Jika produk sudah di favoritkan, maka hapus dari daftar favorit
       favoriteHomes.remove(widget.varProduct.name);
-      // isFavorite = false;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('${widget.varProduct.name} Removed from favorites'),
         duration: Duration(seconds: 1),
@@ -50,7 +49,6 @@ class _ProductpageState extends State<Productpage> {
     } else {
       // Jika produk belum di favoritkan, tambahkan ke daftar favorit
       favoriteHomes.add(widget.varProduct.name);
-      // isFavorite = true;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('${widget.varProduct.name} Added to favorites'),
         duration: Duration(seconds: 1),
@@ -62,7 +60,7 @@ class _ProductpageState extends State<Productpage> {
     });
   }
 
-  // Function to handle decrease in quantity
+  // Fungsi untuk menangani pengurangan jumlah
   void _decreaseQuantity() {
     if (quantity > 1) {
       setState(() {
@@ -72,7 +70,7 @@ class _ProductpageState extends State<Productpage> {
     }
   }
 
-  // Function to handle increase in quantity
+  // Fungsi untuk menangani penambahan jumlah
   void _increaseQuantity() {
     setState(() {
       quantity++;
@@ -80,12 +78,12 @@ class _ProductpageState extends State<Productpage> {
     });
   }
 
-  // Function to handle text field changes and validation
+  // Fungsi untuk menangani perubahan dan validasi pada text field
   void _onQuantityChanged(String value) {
-    // Try to parse the value and ensure it's a valid integer and greater than 0
+    // Coba untuk mengurai nilai dan pastikan itu adalah bilangan bulat yang valid dan lebih besar dari 0
     int newQuantity = int.tryParse(value) ?? quantity;
     if (newQuantity < 1) {
-      newQuantity = 1; // Prevent negative or zero quantity
+      newQuantity = 1; // Mencegah jumlah negatif atau nol
     }
     setState(() {
       quantity = newQuantity;
@@ -165,7 +163,7 @@ class _ProductpageState extends State<Productpage> {
                               color: Color(0xFF4C54A5),
                             ),
                             onRatingUpdate: (index) {
-                              // Add your onRatingUpdate code here!
+                                // Tambahkan kode onRatingUpdate Anda di sini!
                             },
                           ),
                           Row(
@@ -187,7 +185,7 @@ class _ProductpageState extends State<Productpage> {
                                 ),
                                 child: Center(  // Center the icon
                                   child: IconButton(
-                                    icon: Icon(Icons.remove, size: 18), // Adjust the icon size
+                                    icon: Icon(Icons.remove, size: 18), // Adjust icon size
                                     onPressed: _decreaseQuantity, // Decrease quantity
                                   ),
                                 ),
@@ -200,7 +198,7 @@ class _ProductpageState extends State<Productpage> {
                                     controller: quantityController,
                                     textAlign: TextAlign.center,
                                     keyboardType: TextInputType.number,
-                                    onChanged: _onQuantityChanged, // Update quantity when changed
+                                    onChanged: _onQuantityChanged, // Update quantity kalo berubah
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(),
                                       contentPadding: EdgeInsets.symmetric(vertical: 0),
@@ -228,9 +226,9 @@ class _ProductpageState extends State<Productpage> {
                                     ),
                                   ],
                                 ),
-                                child: Center(  // Center the icon
+                                child: Center(
                                   child: IconButton(
-                                    icon: Icon(Icons.add, size: 18), // Adjust the icon size
+                                    icon: Icon(Icons.add, size: 18), // Adjust icon size
                                     onPressed: _increaseQuantity, // Increase quantity
                                   ),
                                 ),
@@ -260,9 +258,11 @@ class _ProductpageState extends State<Productpage> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: ProductBottomNavBar(
-          product: widget.varProduct
+          product: widget.varProduct,
+          quantity: quantity, // Pass quantity here
         ),
       ),
+
     );
   }
 }

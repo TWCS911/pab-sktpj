@@ -1,5 +1,3 @@
-import 'package:ecommerce_sktpj/data/user_data.dart';
-import 'package:ecommerce_sktpj/models/user.dart';
 import 'package:ecommerce_sktpj/pages/main_page.dart';
 import 'package:ecommerce_sktpj/pages/register_page.dart';
 import 'package:flutter/material.dart';
@@ -11,142 +9,106 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-final TextEditingController _emailNameController = TextEditingController();
-final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF4C54A5),
+      backgroundColor: const Color(0xFF4C54A5),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
-              // Logo dengan jarak yang lebih dekat
+              // Logo
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+                padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
                 child: Image.asset("images/logo_maggha.png"),
               ),
 
-              // Kolom input Username dengan ikon profil dan teks di tengah
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                height: 55,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF5F9FD),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  controller: _emailNameController,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person, color: Colors.blue),
-                    hintText: 'Masukkan Username atau email',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                    border: InputBorder.none,
-                  ),
-                ),
+              // Input Email/Username
+              _buildInputField(
+                controller: _emailNameController,
+                icon: Icons.person,
+                hintText: 'Masukkan Username atau Email',
               ),
+              const SizedBox(height: 10),
 
-              SizedBox(height: 10), // Mengurangi jarak antar elemen
-
-              // Kolom input Password dengan ikon kunci dan teks di tengah
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                height: 55,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF5F9FD),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock, color: Colors.blue),
-                    hintText: 'Masukkan Password Anda',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                    border: InputBorder.none,
-                  ),
-                ),
+              // Input Password
+              _buildInputField(
+                controller: _passwordController,
+                icon: Icons.lock,
+                hintText: 'Masukkan Password Anda',
+                obscureText: true,
               ),
+              const SizedBox(height: 20),
 
-              // Row to align Forgot Password and Don't Have an Account links
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Distribute the space between the two links
-                  children: [
-                    // Forgot Password link (aligned left)
-                    TextButton(
-                      onPressed: () {
-                        // Tambahkan fungsionalitas untuk forgot password
-                      },
-                      child: Text(
-                        'Lupa Password?',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
+              // Tautan
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      //fitur lupa password
+                    },
+                    child: const Text(
+                      'Lupa Password?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 14,
                       ),
                     ),
-                    
-                    // Don't have an account link (aligned right)
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
-                      },
-                      child: Text(
-                        'Belum Punya Akun?',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                    },
+                    child: const Text(
+                      'Belum Punya Akun?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 14,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-
-              SizedBox(height: 50), // Jarak sedikit di bawah tombol login
+              const SizedBox(height: 50),
 
               // Tombol Login
               InkWell(
                 onTap: () async {
-                  String emailName = _emailNameController.text;
-                  String password = _passwordController.text;
+                  // Lakukan validasi login
+                  bool isValid = await _validateLogin(
+                    _emailNameController.text.trim(),
+                    _passwordController.text.trim(),
+                  );
 
-                  if (validateLogin(emailName, password)){
-                    SharedPreferences prefs = 
-                      await SharedPreferences.getInstance();
-                      await prefs.setBool('isLoggedIn', true);
-                      await prefs.setString('email', emailName);
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MainPage()));
-                  }
-                  else{
+                  if (isValid) {
+                    // Simpan status login
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    await prefs.setBool('isLoggedIn', true);
+
+                    // Navigasi ke halaman utama
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage()),
+                    );
+                  } else {
+                    // Tampilkan pesan kesalahan
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Email atau Password Salah'),
+                      const SnackBar(
+                        content: Text('Username, Email, atau Password salah!'),
                       ),
                     );
                   }
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   height: 55,
-                  width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(10),
@@ -158,10 +120,10 @@ final TextEditingController _passwordController = TextEditingController();
                       ),
                     ],
                   ),
-                  child: Text(
+                  child: const Text(
                     "Masuk",
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       letterSpacing: 1,
@@ -175,13 +137,50 @@ final TextEditingController _passwordController = TextEditingController();
       ),
     );
   }
-  bool validateLogin(String email, String password) {
-    for(User user in userList) {
-      if((user.email == email && user.password == password) || (user.name == email && user.password == password)) {
-        return true;
-      }
+
+  // Fungsi validasi login
+  Future<bool> _validateLogin(String emailName, String password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? storedUsername = prefs.getString('username');
+    String? storedEmail = prefs.getString('email');
+    String? storedPassword = prefs.getString('password');
+
+    if ((emailName == storedUsername || emailName == storedEmail) &&
+        password == storedPassword) {
+      return true;
     }
     return false;
   }
-}
 
+  // Widget field input
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required IconData icon,
+    required String hintText,
+    bool obscureText = false,
+  }) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      height: 55,
+      decoration: BoxDecoration(
+        color: const Color(0xFFF5F9FD),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: Colors.blue),
+          hintText: hintText,
+          hintStyle: const TextStyle(
+            color: Colors.grey,
+            fontSize: 16,
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
+}

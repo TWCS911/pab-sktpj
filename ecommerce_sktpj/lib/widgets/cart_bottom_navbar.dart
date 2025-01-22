@@ -22,7 +22,7 @@ class Cartbottomnavbar extends StatelessWidget {
               },
             ),
             
-            // Row to contain total price and checkout button side by side
+            // Baris untuk menampung total harga dan tombol checkout berdampingan
             Row(
               children: [
                 // Total Price Label
@@ -31,7 +31,7 @@ class Cartbottomnavbar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'Total:', // Update this dynamically based on cart items
+                        'Total:', // Perbarui ini secara dinamis berdasarkan item keranjang
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -49,7 +49,7 @@ class Cartbottomnavbar extends StatelessWidget {
                   ],
                 ),
                 
-                SizedBox(width: 20), // Spacer between total and checkout button
+                SizedBox(width: 20), // Spacer antara total dan tombol checkout
 
                 // Checkout Button
                 ElevatedButton(

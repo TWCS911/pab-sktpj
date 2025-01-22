@@ -1,36 +1,51 @@
-import 'package:flutter/material.dart';
 import 'package:ecommerce_sktpj/models/Product.dart';
+import 'package:flutter/foundation.dart';
 
 class CartProvider with ChangeNotifier {
-  final List<CartItem> _items = [];
+  List<CartItem> _cartItems = [];
 
-  List<CartItem> get items => _items;
+  List<CartItem> get cartItems => _cartItems;
 
-  double get totalPrice => _items.fold(
-        0.0,
-        (sum, item) => sum + (item.product.harga * item.quantity),
-      );
+  void addToCart(Product product, int quantity) {
+    bool itemExists = false;
 
-  void addToCart(Product product) {
-    final index = _items.indexWhere((item) => item.product.name == product.name);
-    if (index >= 0) {
-      _items[index].quantity++;
-    } else {
-      _items.add(CartItem(product: product, quantity: 1));
+    // Check if the product already exists in the cart
+    for (var cartItem in _cartItems) {
+      if (cartItem.product.name == product.name) { // Using unique ID for comparison
+        cartItem.quantity += quantity; // Update quantity
+        itemExists = true;
+        break;
+      }
     }
-    notifyListeners();
+
+    // Add new product if it doesn't exist
+    if (!itemExists) {
+      _cartItems.add(CartItem(product: product, quantity: quantity));
+    }
+
+    notifyListeners(); // Notify listeners of change
   }
 
+
   void removeFromCart(Product product) {
-    _items.removeWhere((item) => item.product.name == product.name);
+    _cartItems.removeWhere((item) => item.product.name == product.name);
     notifyListeners();
   }
 
   void clearCart() {
-    _items.clear(); // Menghapus semua item di keranjang
-    notifyListeners();
+    _cartItems.clear(); // Clears all items from the cart
+    notifyListeners(); // Notify listeners to update the UI
+  }
+
+  double get totalPrice {
+    double total = 0.0;
+    for (var item in _cartItems) {
+      total += item.product.harga * item.quantity; // Multiply price by quantity
+    }
+    return total;
   }
 }
+
 class CartItem {
   final Product product;
   int quantity;

@@ -5,8 +5,9 @@ import 'package:provider/provider.dart';
 
 class ProductBottomNavBar extends StatelessWidget {
   final Product product;
+  final int quantity; // Add quantity field here
 
-  ProductBottomNavBar({required this.product});
+  ProductBottomNavBar({required this.product, required this.quantity}); // Update constructor
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class ProductBottomNavBar extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   final cart = Provider.of<CartProvider>(context, listen: false);
-                  cart.addToCart(product);
+                  cart.addToCart(product, quantity);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('${product.name} ditambahkan ke keranjang!')),
                   );
@@ -29,7 +30,7 @@ class ProductBottomNavBar extends StatelessWidget {
                   backgroundColor: Colors.green, // Background color
                 ),
                 child: Text(
-                  'Add to Cart',
+                  'Add to Cart ($quantity)', // Show quantity here
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -43,3 +44,4 @@ class ProductBottomNavBar extends StatelessWidget {
     );
   }
 }
+

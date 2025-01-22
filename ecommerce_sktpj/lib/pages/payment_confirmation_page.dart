@@ -59,7 +59,7 @@ class PaymentConfirmationPage extends StatelessWidget {
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                // Kosongkan keranjang setelah pembayaran
+                // Isi keranjang setelah checkout jadi kosong
                 Provider.of<CartProvider>(context, listen: false).clearCart();
 
                 // Kembali ke halaman utama

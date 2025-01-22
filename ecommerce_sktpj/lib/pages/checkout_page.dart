@@ -96,7 +96,7 @@ class _CheckoutPaymentPageState extends State<CheckoutPage> {
                     ),
                   ),
                   child: Text(
-                    'Continue',
+                    'Lanjut',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),

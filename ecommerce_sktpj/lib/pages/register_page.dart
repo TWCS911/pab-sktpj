@@ -1,7 +1,12 @@
 import 'package:ecommerce_sktpj/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatelessWidget {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +24,7 @@ class RegisterPage extends StatelessWidget {
 
               // Input Username
               _buildInputField(
+                controller: _usernameController,
                 icon: Icons.person,
                 hintText: "Masukkan Username Anda",
               ),
@@ -26,6 +32,7 @@ class RegisterPage extends StatelessWidget {
 
               // Input Email
               _buildInputField(
+                controller: _emailController,
                 icon: Icons.email,
                 hintText: "Masukkan Email Anda",
               ),
@@ -33,6 +40,7 @@ class RegisterPage extends StatelessWidget {
 
               // Input Password
               _buildInputField(
+                controller: _passwordController,
                 icon: Icons.lock,
                 hintText: "Masukkan Password Anda",
                 obscureText: true,
@@ -42,7 +50,8 @@ class RegisterPage extends StatelessWidget {
               // Tautan Login jika sudah memiliki akun
               TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => LoginPage()));
                 },
                 child: const Text(
                   'Sudah Punya Akun? Login',
@@ -58,8 +67,8 @@ class RegisterPage extends StatelessWidget {
 
               // Tombol Daftar
               InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                onTap: () async {
+                  await _register(context);
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -95,8 +104,42 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
+  // Fungsi untuk menyimpan data register ke Shared Preferences
+  Future<void> _register(BuildContext context) async {
+    String username = _usernameController.text.trim();
+    String email = _emailController.text.trim();
+    String password = _passwordController.text;
+
+    if (username.isEmpty || email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Harap isi semua data!'),
+        ),
+      );
+      return;
+    }
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', username);
+    await prefs.setString('email', email);
+    await prefs.setString('password', password);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Registrasi Berhasil!'),
+      ),
+    );
+
+    // Arahkan ke halaman login
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
+  }
+
   // Fungsi untuk membangun field input
   Widget _buildInputField({
+    required TextEditingController controller,
     required IconData icon,
     required String hintText,
     bool obscureText = false,
@@ -110,6 +153,7 @@ class RegisterPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
+        controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
           prefixIcon: Icon(icon, color: Colors.blue),
