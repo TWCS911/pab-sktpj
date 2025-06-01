@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "477083354649",
+    "firebase_url": "https://latihan-uas-46cc0-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "latihan-uas-46cc0",
+    "storage_bucket": "latihan-uas-46cc0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477083354649:android:6df069ae9ec9adb9b70c88",
+        "android_client_info": {
+          "package_name": "com.example.latihan_uas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsi-QDYsCt14qvK_mGtd2OnMA9e8FtoVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
